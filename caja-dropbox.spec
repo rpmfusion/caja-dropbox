@@ -39,10 +39,8 @@ your computers automatically.
 autoreconf -i -f
 
 %build
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
 # xvfb-run is needed to find pygtk2
-xvfb-run -a ./configure
+xvfb-run -a ./configure CFLAGS="$RPM_OPT_FLAGS"
 
 xvfb-run -a make %{?_smp_mflags}
 

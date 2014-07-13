@@ -1,26 +1,29 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		1.6.0
-Release: 		4%{?dist}
+Release: 		5%{?dist}
 License: 		GPLv3+ and CC-BY-ND
 Group: 			User Interface/Desktops
 URL: 			https://linux.dropbox.com
 Source0: 		https://linux.dropbox.com/packages/nautilus-dropbox-%{version}.tar.bz2
-# script binary with serialize images
-Source1: 		dropbox
 
 Patch0:         caja-dropbox_fix_autoconf-automake_deprecations.patch
 Patch1:         caja-dropbox_nautilus_to_caja.patch
-Patch2:         caja-dropbox_disable-creation-of-dropbox-script-binary.patch
-Patch3:         caja-dropbox_fix-pygtk-in-configure.patch
 
-BuildRequires: 	mate-file-manager-devel
+BuildRequires: 	caja-devel
 BuildRequires:  python-docutils
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
+BuildRequires:  pygobject2-devel
+BuildRequires:  pygtk2-devel
 
-Requires: 		mate-file-manager-extensions
+# Run a fake X session 
+BuildRequires:  xorg-x11-server-Xvfb
+BuildRequires:  xorg-x11-xauth
+BuildRequires:  zlib-devel
+
+Requires: 		caja-extensions
 Requires: 		pygtk2
 Requires: 		hicolor-icon-theme
 
@@ -34,23 +37,17 @@ your computers automatically.
 
 %patch0 -p1 -b .deprecations
 %patch1 -p1 -b .caja
-%patch2 -p1 -b .disable-creation
 
 autoreconf -i -f
-%patch3 -p1 -b .pygtk
-
-cp %{SOURCE1} dropbox
 
 %build
-%configure
+# xvfb-run is needed to find pygtk2
+xvfb-run -a ./configure
 
-make %{?_smp_mflags}
+xvfb-run -a make %{?_smp_mflags}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-
-mkdir -m 755 -p $RPM_BUILD_ROOT%{_bindir}
-install -m 755 -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/dropbox
+%{make_install}
 
 find ${RPM_BUILD_ROOT} -type f -name "*.la" -exec rm -f {} ';'
 find ${RPM_BUILD_ROOT} -type f -name "*.a" -exec rm -f {} ';'
@@ -86,6 +83,9 @@ fi
 
 
 %changelog
+* Sun Jul 13 2014 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.6.0-5
+- try use a fake X session to find pygtk2 BR
+
 * Sun Jul 21 2013 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.6.0-4
 - don't use fake X session for build server
 - add script binary with serialize images

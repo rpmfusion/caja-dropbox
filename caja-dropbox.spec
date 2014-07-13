@@ -1,7 +1,7 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		1.6.0
-Release: 		5%{?dist}
+Release: 		6%{?dist}
 License: 		GPLv3+ and CC-BY-ND
 Group: 			User Interface/Desktops
 URL: 			https://linux.dropbox.com
@@ -83,6 +83,9 @@ fi
 
 
 %changelog
+* Sun Jul 13 2014 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.6.0-6
+- bump version to fix build
+
 * Sun Jul 13 2014 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.6.0-5
 - try use a fake X session to find pygtk2 BR
 

@@ -1,7 +1,7 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		1.6.0
-Release: 		6%{?dist}
+Release: 		7%{?dist}
 License: 		GPLv3+ and CC-BY-ND
 Group: 			User Interface/Desktops
 URL: 			https://linux.dropbox.com
@@ -83,6 +83,9 @@ fi
 
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.6.0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Sun Jul 13 2014 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.6.0-6
 - bump version to fix build
 

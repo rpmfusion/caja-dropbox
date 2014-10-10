@@ -1,0 +1,22 @@
+diff -upr caja-dropbox-1.8.0-orig/Makefile.am caja-dropbox-1.8.0/Makefile.am
+--- caja-dropbox-1.8.0-orig/Makefile.am	2014-07-17 14:40:21.000000000 +0200
++++ caja-dropbox-1.8.0/Makefile.am	2014-10-10 18:04:36.561818519 +0200
+@@ -1,15 +1,10 @@
+ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+ 
+-bin_SCRIPTS = caja-dropbox
+-CLEANFILES = $(bin_SCRIPTS) caja-dropbox.1 caja-dropbox.txt
+-EXTRA_DIST = caja-dropbox.in serializeimages.py caja-dropbox.txt.in docgen.py rst2man.py
++CLEANFILES = caja-dropbox.1 caja-dropbox.txt
++EXTRA_DIST = caja-dropbox.txt.in docgen.py rst2man.py
+ man_MANS = caja-dropbox.1
+ 
+-caja-dropbox: caja-dropbox.in serializeimages.py
+-	python serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < caja-dropbox.in > caja-dropbox
+-	chmod +x caja-dropbox
+-
+-caja-dropbox.1: caja-dropbox.txt.in caja-dropbox docgen.py
++caja-dropbox.1: caja-dropbox.txt.in docgen.py
+ 	python docgen.py $(PACKAGE_VERSION) caja-dropbox.txt.in caja-dropbox.txt
+ 	$(RST2MAN) caja-dropbox.txt > caja-dropbox.1
+ 

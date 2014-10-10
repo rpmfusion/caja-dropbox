@@ -1,14 +1,16 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
-Version: 		1.6.0
-Release: 		7%{?dist}
+Version: 		1.8.0
+Release: 		1%{?dist}
 License: 		GPLv3+ and CC-BY-ND
 Group: 			User Interface/Desktops
-URL: 			https://linux.dropbox.com
-Source0: 		https://linux.dropbox.com/packages/nautilus-dropbox-%{version}.tar.bz2
+URL: 			https://github.com/mate-desktop/caja-dropbox
+Source0: 		http://pub.mate-desktop.org/releases/1.8/caja-dropbox-%{version}.tar.xz
+# script binary with serialize images
+Source1: 		caja-dropbox
 
-Patch0:         caja-dropbox_fix_autoconf-automake_deprecations.patch
-Patch1:         caja-dropbox_nautilus_to_caja.patch
+Patch2:         caja-dropbox-1.8.0_disable-creation-of-dropbox-script-binary.patch
+Patch3:         caja-dropbox_fix-pygtk-in-configure.patch
 
 BuildRequires: 	caja-devel
 BuildRequires:  python-docutils
@@ -17,11 +19,6 @@ BuildRequires:  automake
 BuildRequires:  libtool
 BuildRequires:  pygobject2-devel
 BuildRequires:  pygtk2-devel
-
-# Run a fake X session 
-BuildRequires:  xorg-x11-server-Xvfb
-BuildRequires:  xorg-x11-xauth
-BuildRequires:  zlib-devel
 
 Requires: 		caja-extensions
 Requires: 		pygtk2
@@ -33,28 +30,32 @@ Dropbox allows you to sync your files online and across
 your computers automatically.
 
 %prep
-%setup -q -n nautilus-dropbox-%{version}
+%setup -q
 
-%patch0 -p1 -b .deprecations
-%patch1 -p1 -b .caja
+%patch2 -p1 -b .disable-creation
 
 autoreconf -i -f
+%patch3 -p1 -b .pygtk
+
+cp %{SOURCE1} caja-dropbox
 
 %build
-# xvfb-run is needed to find pygtk2
-xvfb-run -a ./configure
+%configure
 
-xvfb-run -a make %{?_smp_mflags}
+make %{?_smp_mflags}
 
 %install
 %{make_install}
+
+mkdir -m 755 -p $RPM_BUILD_ROOT%{_bindir}
+install -m 755 -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/caja-dropbox
 
 find ${RPM_BUILD_ROOT} -type f -name "*.la" -exec rm -f {} ';'
 find ${RPM_BUILD_ROOT} -type f -name "*.a" -exec rm -f {} ';'
 
 
 %check
-desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/dropbox.desktop
+desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/caja-dropbox.desktop
 
 
 %post
@@ -74,15 +75,19 @@ fi
 
 %files
 %doc AUTHORS COPYING NEWS README 
-%{_bindir}/dropbox
+%{_bindir}/caja-dropbox
 %{_datadir}/caja-dropbox/
 %{_datadir}/icons/hicolor/*
-%{_mandir}/man1/dropbox.1.gz
-%{_datadir}/applications/dropbox.desktop
+%{_mandir}/man1/caja-dropbox.1.gz
+%{_datadir}/applications/caja-dropbox.desktop
 %{_libdir}/caja/extensions-2.0/libcaja-dropbox.so
 
 
 %changelog
+* Fri Oct 10 2014 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.8.0-1
+- switch to mate upstream
+- update to 1.8.0 release
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.6.0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 

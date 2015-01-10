@@ -1,11 +1,13 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		1.8.0
-Release: 		2%{?dist}
+Release: 		3%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			https://github.com/mate-desktop/caja-dropbox
 Source0: 		http://pub.mate-desktop.org/releases/1.8/caja-dropbox-%{version}.tar.xz
+
+ExclusiveArch:  i686 x86_64
 
 BuildRequires:  caja-devel
 BuildRequires:  python-docutils
@@ -52,6 +54,9 @@ rm -rf ${RPM_BUILD_ROOT}%{_datadir}
 
 
 %changelog
+* Sat Jan 10 2015 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.8.0-3
+- add ExclusiveArch
+
 * Sat Dec 20 2014 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.8.0-2
 - use rpmfusion dropbox require
 - fix license information

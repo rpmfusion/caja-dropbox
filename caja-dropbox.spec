@@ -1,11 +1,11 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
-Version: 		1.10.0
-Release: 		3%{?dist}
+Version: 		1.12.0
+Release: 		1%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			https://github.com/mate-desktop/caja-dropbox
-Source0: 		http://pub.mate-desktop.org/releases/1.8/caja-dropbox-%{version}.tar.xz
+Source0: 		http://pub.mate-desktop.org/releases/1.12/caja-dropbox-%{version}.tar.xz
 
 ExclusiveArch:  i686 x86_64
 
@@ -54,6 +54,9 @@ rm -rf ${RPM_BUILD_ROOT}%{_datadir}
 
 
 %changelog
+* Sun Nov 15 2015 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.12.0-1
+- update to 1.12.0 release
+
 * Sun Aug 09 2015 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.10.0-3
 - update to 1.10.0 release
 

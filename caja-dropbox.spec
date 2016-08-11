@@ -57,7 +57,7 @@ rm -rf ${RPM_BUILD_ROOT}%{_datadir}
 
 
 %changelog
-* Thu Aug 11 2015 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.15.0-1
+* Thu Aug 11 2016 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.15.0-1
 - update to 1.15.0 release
 
 * Sun Jun 19 2016 Leigh Scott <leigh123linux@googlemail.com> - 1.14.0-1

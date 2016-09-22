@@ -1,9 +1,9 @@
 # This is needed, because src-url contains branched part of versioning-scheme.
-%global branch 1.15
+%global branch 1.16
 
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
-Version: 		1.15.0
+Version: 		1.16.0
 Release: 		1%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
@@ -57,6 +57,9 @@ rm -rf ${RPM_BUILD_ROOT}%{_datadir}
 
 
 %changelog
+* Thu Sep 22 2016 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.16.0-1
+- update to 1.16.0 release
+
 * Thu Aug 11 2016 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.15.0-1
 - update to 1.15.0 release
 

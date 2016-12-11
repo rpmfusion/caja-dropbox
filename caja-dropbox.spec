@@ -3,7 +3,7 @@
 
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
-Version: 		1.16.0
+Version: 		1.17.0
 Release: 		1%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
@@ -57,6 +57,9 @@ rm -rf ${RPM_BUILD_ROOT}%{_datadir}
 
 
 %changelog
+* Sun Dec 11 2016 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.17.0-1
+- update to 1.17.0 release
+
 * Thu Sep 22 2016 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.16.0-1
 - update to 1.16.0 release
 

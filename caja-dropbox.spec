@@ -1,10 +1,10 @@
 # This is needed, because src-url contains branched part of versioning-scheme.
-%global branch 1.16
+%global branch 1.20
 
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
-Version: 		1.18.0
-Release: 		2%{?dist}
+Version: 		%{branch}.0
+Release: 		1%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			http://git.mate-desktop.org/%{name}
@@ -61,6 +61,9 @@ rm -rf ${RPM_BUILD_ROOT}%{_datadir}
 
 
 %changelog
+* Mon May 02 2018 Wolfgang Ulbrich <fedora@raveit.de> - 1.20.0-1
+- update to 1.20.0
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.18.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 

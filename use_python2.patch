@@ -1,6 +1,6 @@
 --- a/configure.ac
 +++ b/configure.ac
-@@ -29,16 +29,16 @@
+@@ -30,16 +30,16 @@ fi
  PKG_CHECK_MODULES(CAJA, libcaja-extension >= $CAJA_REQUIRED)
  PKG_CHECK_MODULES(GLIB, glib-2.0 >= $GLIB_REQUIRED)
  
@@ -20,20 +20,19 @@
  try:
   import $2
  except:
-
 --- a/Makefile.am
 +++ b/Makefile.am
- man_MANS = dropbox.1
+@@ -6,11 +6,11 @@ EXTRA_DIST = caja-dropbox.in serializeim
+ man_MANS = caja-dropbox.1
  
- dropbox: dropbox.in serializeimages.py
--	python serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < dropbox.in > dropbox
-+	python2 serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < dropbox.in > dropbox
- 	chmod +x dropbox
+ caja-dropbox: caja-dropbox.in serializeimages.py
+-	python serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < caja-dropbox.in > caja-dropbox
++	python2 serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < caja-dropbox.in > caja-dropbox
+ 	chmod +x caja-dropbox
  
- dropbox.1: dropbox dropbox.txt.in docgen.py
--	python docgen.py $(PACKAGE_VERSION) < dropbox.txt.in > dropbox.txt
-+	python2 docgen.py $(PACKAGE_VERSION) < dropbox.txt.in > dropbox.txt
- 	$(RST2MAN) dropbox.txt > dropbox.1
+ caja-dropbox.1: caja-dropbox.txt.in caja-dropbox docgen.py
+-	python docgen.py $(PACKAGE_VERSION) caja-dropbox.txt.in caja-dropbox.txt
++	python2 docgen.py $(PACKAGE_VERSION) caja-dropbox.txt.in caja-dropbox.txt
+ 	$(RST2MAN) caja-dropbox.txt > caja-dropbox.1
  
  SUBDIRS = data src
-

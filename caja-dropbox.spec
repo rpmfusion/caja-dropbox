@@ -4,11 +4,12 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		%{branch}.0
-Release: 		1%{?dist}
+Release: 		2%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			http://git.mate-desktop.org/%{name}
 Source0: 		http://pub.mate-desktop.org/releases/%{branch}/%{name}-%{version}.tar.xz
+Patch0:			use_python2.patch
 
 ExclusiveArch:  i686 x86_64
 
@@ -34,33 +35,35 @@ Dropbox allows you to sync your files online and across
 your computers automatically.
 
 %prep
-%setup -q
+%autosetup -p1
+autoreconf -fiv
 
 %build
 %configure
 
-make %{?_smp_mflags}
+%{make_build}
 
 %install
 %{make_install}
 
-find ${RPM_BUILD_ROOT} -type f -name "*.la" -exec rm -f {} ';'
-find ${RPM_BUILD_ROOT} -type f -name "*.a" -exec rm -f {} ';'
+find %{buildroot} -name '*.la' -or -name '*.a' | xargs rm -f
 
-rm -rf ${RPM_BUILD_ROOT}%{_bindir}
-rm -rf ${RPM_BUILD_ROOT}%{_datadir}
+rm -rf %{buildroot}%{_bindir}
+rm -rf %{buildroot}%{_datadir}
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files
-%doc AUTHORS COPYING NEWS README 
+%doc AUTHORS NEWS README
+%license COPYING 
 %{_libdir}/caja/extensions-2.0/libcaja-dropbox.so
 
 
 %changelog
+* Tue Jul 24 2018 Leigh Scott <leigh123linux@googlemail.com> - 1.20.0-2
+- Fix build for f29 python changes
+
 * Mon May 02 2018 Wolfgang Ulbrich <fedora@raveit.de> - 1.20.0-1
 - update to 1.20.0
 

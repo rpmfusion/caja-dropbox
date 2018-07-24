@@ -1,0 +1,39 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -29,16 +29,16 @@
+ PKG_CHECK_MODULES(CAJA, libcaja-extension >= $CAJA_REQUIRED)
+ PKG_CHECK_MODULES(GLIB, glib-2.0 >= $GLIB_REQUIRED)
+ 
+-AC_PATH_PROG([PYTHON], [python])
++AC_PATH_PROG([PYTHON], [python2])
+ 
+-AC_PATH_PROG([RST2MAN], [rst2man], [python rst2man.py])
++AC_PATH_PROG([RST2MAN], [rst2man], [python2 rst2man.py])
+ AC_SUBST(RST2MAN)
+ 
+ # define module checking macro
+ AC_DEFUN([PYTHON_CHECK_MODULE], [
+ AC_MSG_CHECKING([for $1])
+ 
+-cat <<EOF | python
++cat <<EOF | python2
+ try:
+  import $2
+ except:
+
+--- a/Makefile.am
++++ b/Makefile.am
+ man_MANS = dropbox.1
+ 
+ dropbox: dropbox.in serializeimages.py
+-	python serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < dropbox.in > dropbox
++	python2 serializeimages.py $(PACKAGE_VERSION) $(datadir)/applications < dropbox.in > dropbox
+ 	chmod +x dropbox
+ 
+ dropbox.1: dropbox dropbox.txt.in docgen.py
+-	python docgen.py $(PACKAGE_VERSION) < dropbox.txt.in > dropbox.txt
++	python2 docgen.py $(PACKAGE_VERSION) < dropbox.txt.in > dropbox.txt
+ 	$(RST2MAN) dropbox.txt > dropbox.1
+ 
+ SUBDIRS = data src
+

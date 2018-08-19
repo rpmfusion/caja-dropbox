@@ -4,7 +4,7 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		%{branch}.0
-Release: 		2%{?dist}
+Release: 		3%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			http://git.mate-desktop.org/%{name}
@@ -61,6 +61,9 @@ rm -rf %{buildroot}%{_datadir}
 
 
 %changelog
+* Sun Aug 19 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.20.0-3
+- Rebuilt for Fedora 29 Mass Rebuild binutils issue
+
 * Tue Jul 24 2018 Leigh Scott <leigh123linux@googlemail.com> - 1.20.0-2
 - Fix build for f29 python changes
 

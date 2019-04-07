@@ -49,11 +49,9 @@ find %{buildroot} -name '*.la' -or -name '*.a' | xargs rm -f
 
 rm -rf %{buildroot}%{_bindir}
 rm -rf %{buildroot}%{_datadir}/caja-dropbox/*
-rm -rf %{buildroot}%{_icondir}/*
-rm -rf %{buildroot}%{_mandir}/man1/caja-dropbox.1.*
-rm -rf %{buildroot}%{_datadir}/applications/caja-dropbox.desktop
-
-%ldconfig_scriptlets
+rm -rf %{buildroot}%{_datadir}/icons/hicolor/*/apps/*
+rm -rf %{buildroot}%{_datadir}/man/man1/*
+rm -rf %{buildroot}%{_datadir}/applications/*
 
 
 %files

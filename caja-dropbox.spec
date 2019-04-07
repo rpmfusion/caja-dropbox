@@ -1,33 +1,30 @@
 # This is needed, because src-url contains branched part of versioning-scheme.
-%global branch 1.20
+%global branch 1.22
 
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		%{branch}.0
-Release: 		4%{?dist}
+Release: 		1%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
-URL: 			http://git.mate-desktop.org/%{name}
-Source0: 		http://pub.mate-desktop.org/releases/%{branch}/%{name}-%{version}.tar.xz
-Patch0:			use_python2.patch
+URL: 			https://mate-desktop.org
+Source0: 		https://pub.mate-desktop.org/releases/%{branch}/%{name}-%{version}.tar.xz
 
-ExclusiveArch:  i686 x86_64
+# https://github.com/mate-desktop/caja-dropbox/commit/fdc25dc
+Patch1:     caja-dropbox_0001-show-full-path-of-caja-extension-dir.patch
+# https://github.com/mate-desktop/caja-dropbox/commit/5fdcb17
+Patch2:     caja-dropbox_0002-Use-CAJA_EXTENSION_DIR_SYS-to-save-and-show-system-c.patch
 
+BuildRequires:  gcc
 BuildRequires:  caja-devel
-%if 0%{?fedora} >= 26
-BuildRequires:  python2-docutils
-%else
-BuildRequires:  python-docutils
-%endif
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  libtool
-BuildRequires:  pygobject2-devel
-BuildRequires:  pygtk2-devel
+BuildRequires:  mate-common
+BuildRequires:  python3-docutils
+BuildRequires:  pygobject3-devel
 
 Requires:       dropbox >= 1:2.10.0
 Requires:       caja-extensions
-Requires:       pygtk2
+Requires:       python3-gpg
+Requires:       python3-gobject
 
 %description
 Dropbox extension for caja file manager
@@ -36,11 +33,10 @@ your computers automatically.
 
 %prep
 %autosetup -p1
-autoreconf -fiv
+
 
 %build
-%configure
-
+%configure --disable-static
 %{make_build}
 
 %install
@@ -49,7 +45,10 @@ autoreconf -fiv
 find %{buildroot} -name '*.la' -or -name '*.a' | xargs rm -f
 
 rm -rf %{buildroot}%{_bindir}
-rm -rf %{buildroot}%{_datadir}
+rm -rf %{buildroot}%{_datadir}/caja-dropbox/*
+rm -rf %{buildroot}%{_icondir}
+rm -rf %{buildroot}%{_mandir}/man1/caja-dropbox.1.*
+rm -rf %{buildroot}%{_datadir}/applications/caja-dropbox.desktop
 
 %ldconfig_scriptlets
 
@@ -58,9 +57,15 @@ rm -rf %{buildroot}%{_datadir}
 %doc AUTHORS NEWS README
 %license COPYING 
 %{_libdir}/caja/extensions-2.0/libcaja-dropbox.so
+%{_datadir}/caja/extensions/libcaja-dropbox.caja-extension
 
 
 %changelog
+* Sun Apr 07 2019 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.22.0-1
+- update to 1.22.0
+- use some upstream patches
+- build for all archs
+
 * Tue Mar 05 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.20.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 

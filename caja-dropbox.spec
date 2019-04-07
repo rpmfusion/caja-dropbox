@@ -15,6 +15,9 @@ Patch1:     caja-dropbox_0001-show-full-path-of-caja-extension-dir.patch
 # https://github.com/mate-desktop/caja-dropbox/commit/5fdcb17
 Patch2:     caja-dropbox_0002-Use-CAJA_EXTENSION_DIR_SYS-to-save-and-show-system-c.patch
 
+# link to fedora repos seems to be wrong for f30
+ExcludeArch:    ppc64le
+
 BuildRequires:  gcc
 BuildRequires:  caja-devel
 BuildRequires:  mate-common

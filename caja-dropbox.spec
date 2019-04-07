@@ -75,7 +75,7 @@ rm -rf %{buildroot}%{_datadir}/applications/caja-dropbox.desktop
 * Tue Jul 24 2018 Leigh Scott <leigh123linux@googlemail.com> - 1.20.0-2
 - Fix build for f29 python changes
 
-* Mon May 02 2018 Wolfgang Ulbrich <fedora@raveit.de> - 1.20.0-1
+* Wed May 02 2018 Wolfgang Ulbrich <fedora@raveit.de> - 1.20.0-1
 - update to 1.20.0
 
 * Fri Mar 02 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 1.18.0-3

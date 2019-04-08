@@ -4,7 +4,7 @@
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		%{branch}.0
-Release: 		1%{?dist}
+Release: 		2%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			https://mate-desktop.org
@@ -15,8 +15,7 @@ Patch1:     caja-dropbox_0001-show-full-path-of-caja-extension-dir.patch
 # https://github.com/mate-desktop/caja-dropbox/commit/5fdcb17
 Patch2:     caja-dropbox_0002-Use-CAJA_EXTENSION_DIR_SYS-to-save-and-show-system-c.patch
 
-# link to fedora repos seems to be wrong for f30
-ExcludeArch:    ppc64le
+ExclusiveArch:  i686 x86_64
 
 BuildRequires:  gcc
 BuildRequires:  caja-devel
@@ -62,6 +61,9 @@ rm -rf %{buildroot}%{_datadir}/applications/*
 
 
 %changelog
+* Mon Apr 08 2019 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.22.0-2
+- exclude archs again
+
 * Sun Apr 07 2019 Wolfgang Ulbrich <chat-to-me@raveit.de> - 1.22.0-1
 - update to 1.22.0
 - use some upstream patches

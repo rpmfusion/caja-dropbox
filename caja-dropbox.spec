@@ -1,10 +1,10 @@
 # This is needed, because src-url contains branched part of versioning-scheme.
-%global branch 1.24
+%global branch 1.26
 
 Summary: 		Dropbox extension for caja
 Name: 			caja-dropbox
 Version: 		%{branch}.0
-Release: 		6%{?dist}
+Release: 		1%{?dist}
 License: 		GPLv2+
 Group: 			User Interface/Desktops
 URL: 			https://mate-desktop.org
@@ -46,6 +46,7 @@ rm -rf %{buildroot}%{_datadir}/caja-dropbox/*
 rm -rf %{buildroot}%{_datadir}/icons/hicolor/*/apps/*
 rm -rf %{buildroot}%{_datadir}/man/man1/*
 rm -rf %{buildroot}%{_datadir}/applications/*
+rm -rf %{buildroot}%{_datadir}/locale/*
 
 
 %files
@@ -56,6 +57,9 @@ rm -rf %{buildroot}%{_datadir}/applications/*
 
 
 %changelog
+* Mon Feb 28 2022 Sérgio Basto <sergio@serjux.com> - 1.26.0-1
+- Update caja-dropbox to 1.26.0
+
 * Thu Feb 10 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.24.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
